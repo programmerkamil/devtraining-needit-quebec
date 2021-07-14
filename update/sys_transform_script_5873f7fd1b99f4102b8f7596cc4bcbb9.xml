@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <map display_value="cmdbdatacsvexamp">4acca3791b99f4102b8f7596cc4bcbe2</map>
+        <order>100</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+
+	// Add your code here
+	// Call CMDB API to do Identification and Reconciliation of current row
+var cmdbUtil = new global.CMDBTransformUtil();
+cmdbUtil.setDataSource('test data)'); //This is the name you added in the step above. 
+cmdbUtil.identifyAndReconcile(source, map, log);
+ignore = true;
+
+if (cmdbUtil.hasError()) {
+        var errorMessage = cmdbUtil.getError();
+        log.error(errorMessage);
+} else {
+        log.info('IE Output Payload: ' + cmdbUtil.getOutputPayload());
+        log.info('Imported CI: ' + cmdbUtil.getOutputRecordSysId());
+}
+
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-07-13 07:03:44</sys_created_on>
+        <sys_id>5873f7fd1b99f4102b8f7596cc4bcbb9</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>onBefore</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_transform_script_5873f7fd1b99f4102b8f7596cc4bcbb9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-07-13 09:31:03</sys_updated_on>
+        <when>onBefore</when>
+    </sys_transform_script>
+</record_update>

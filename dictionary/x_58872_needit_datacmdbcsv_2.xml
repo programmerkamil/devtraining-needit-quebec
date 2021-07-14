@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="datacmdbcsv-2" max_length="40" name="x_58872_needit_datacmdbcsv_2" sizeclass="6" type="collection">
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=computer_name" label="computer_name" max_length="40" name="u_computer_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=install_directory" label="install_directory" max_length="40" name="u_install_directory" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=OS" label="OS" max_length="40" name="u_os" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=running_process_command" label="running_process_command" max_length="40" name="u_running_process_command" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=running_process_key_parameters" label="running_process_key_parameters" max_length="40" name="u_running_proc_key_parameters" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=tomcatwar_nam" label="tomcatwar_nam" max_length="40" name="u_tomcatwar_nam" type="string"/>
+    </element>
+</database>

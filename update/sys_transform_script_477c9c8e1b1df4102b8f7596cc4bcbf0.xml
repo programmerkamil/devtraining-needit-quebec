@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <map display_value="test Data transform 2">88db144e1b1df4102b8f7596cc4bcb3d</map>
+        <order>100</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+
+    // Add this code to the onBefore transform map script
+    // Call CMDB API to do create or update CI of current row
+    var serverClassName = "cmdb_ci_linux_server";
+    if (source.u_os.getDisplayValue() == "Windows") {
+        serverClassName = "cmdb_ci_win_server";
+    }
+    var computer_name = source.u_computer_name.getDisplayValue();
+    var running_process_key_parameters = source.u_running_proc_key_parameters.getDisplayValue();
+    var running_process_command = source.u_running_process_command.getDisplayValue();
+    var tomcatwar_install_directory = source.u_install_directory.getDisplayValue();
+    var tomcatwar_name = source.u_tomcatwar_name.getDisplayValue();
+
+    var payload = {
+        "items": [{
+            "className": "cmdb_ci_app_server_tomcat_war",
+            "lookup": [],
+            "values": {
+                "install_directory": tomcatwar_install_directory,
+                "name": tomcatwar_name,
+                "sys_class_name": "cmdb_ci_app_server_tomcat_war"
+            }
+        }, {
+            "className": "cmdb_ci_app_server_tomcat",
+            "lookup": [],
+            "values": {
+                "running_process_command": running_process_command,
+                "running_process_key_parameters": running_process_key_parameters,
+                "sys_class_name": "cmdb_ci_app_server_tomcat"
+            }
+        }, {
+            "className": serverClassName,
+            "lookup": [],
+            "values": {
+                "name": computer_name
+            }
+        }],
+        "relations": [{
+            "type": "Contains::Contained by",
+            "parent": 1,
+            "child": 0
+        }, {
+            "type": "Runs on::Runs",
+            "parent": 1,
+            "child": 2
+        }]
+    };
+
+    var input = new global.JSON().encode(payload);
+    var output = sn_cmdb.IdentificationEngine.createOrUpdateCI('MySource', input);
+    log.info(output);
+
+    ignore = true;
+
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-07-13 10:02:58</sys_created_on>
+        <sys_id>477c9c8e1b1df4102b8f7596cc4bcbf0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>onBefore</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_transform_script_477c9c8e1b1df4102b8f7596cc4bcbf0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-07-13 10:02:58</sys_updated_on>
+        <when>onBefore</when>
+    </sys_transform_script>
+</record_update>
